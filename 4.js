@@ -1,25 +1,31 @@
-function ElectricalAppliance(name, power) {
-    this.name = name;
+function ElectricaAppliance(type, model, power) {
+    this.type = type;
+    this.model = model;
     this.power = power;
-    this.isPlugged = false;
-} // метод, который определяет прибор как включенный в розетку
-
-ElectricalAppliance.prototype.plugIn = function() {
-    console.log(this.name + " is plugged!");
-    this.isPlugged = true;
+    this.isOffOn = false
 }
 
-ElectricalAppliance.prototype.getPowerUsed = function() {
-    return this.isPlugged ? this.power : 0;
+ElectricaAppliance.prototype.on = function() {
+    console.log(`The ${this.type} ${this.model} is on`);
+    this.isOffOn = true;
+};
+
+ElectricaAppliance.prototype.off = function() {
+    console.log(`The ${this.type} ${this.model} is off`);
+    this.isOffOn = false;
+};
+
+ElectricaAppliance.prototype.totalPower = function() {
+    if (this.isOffOn) return this.power;
+    else return 0;
 }
 
-const lampa = new ElectricalAppliance('lampa', 45);
-const tv = new ElectricalAppliance('tv', 1000);
+const lampa = new ElectricaAppliance('Lampa', 'tabletop', 95);
+const pc = new ElectricaAppliance('Pc', 'stationary', 800);
+const tv = new ElectricaAppliance('TV', 'LG', 1000);
 
-console.log(lampa.getPowerUsed() + tv.getPowerUsed());
+lampa.on();
+pc.off();
+tv.on();
 
-lampa.plugIn();
-console.log(lampa.getPowerUsed() + tv.getPowerUsed());
-
-tv.plugIn();
-console.log(lampa.getPowerUsed() + tv.getPowerUsed());
+console.log(`Total power = ${lampa.totalPower() + pc.totalPower() + tv.totalPower()} watt`);
