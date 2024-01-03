@@ -1,27 +1,33 @@
-class ElectricalAppliance {
-    constructor(name, power){
-        this.name = name;
+class ElectricaAppliance {
+    constructor(type, model, power) {
+        this.type = type;
+        this.model = model;
         this.power = power;
-        this.isPlugged = false;
-    } 
+        this.isOffOn = false;
+    }
 
-    plugIn(){
-        console.log(this.name + " is plugged!");
-        this.isPlugged = true;
-    }  
+    on() {
+        console.log(`The ${this.type} ${this.model} is on`);
+        this.isOffOn = true;
+    }
 
-    getPowerUsed(){
-        return this.isPlugged ? this.power : 0;
+    off() {
+        console.log(`The ${this.type} ${this.model} is off`);
+        this.isOffOn = false;
+    }
+
+    totalPower() {
+        if (this.isOffOn) return this.power;
+        else return 0;
     }
 }
 
-const lampa = new ElectricalAppliance('lampa', 45);
-const pc = new ElectricalAppliance('pc', 1000);
+const lampa = new ElectricaAppliance('Lampa', 'tabletop', 95);
+const pc = new ElectricaAppliance('Pc', 'stationary', 800);
+const tv = new ElectricaAppliance('TV', 'LG', 1000);
 
-console.log(lampa.getPowerUsed() + pc.getPowerUsed());
+lampa.on();
+pc.on();
+tv.off();
 
-lampa.plugIn();
-console.log(lampa.getPowerUsed() + pc.getPowerUsed());
-
-pc.plugIn();
-console.log(lampa.getPowerUsed() + pc.getPowerUsed());
+console.log(`Total power = ${lampa.totalPower() + pc.totalPower() + tv.totalPower()} watt`);
