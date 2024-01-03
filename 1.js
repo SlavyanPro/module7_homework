@@ -5,10 +5,9 @@ const windowsVersion = {
     developer: 'Microsoft Corporation',
 };
 
-getObjectValues(windowsVersion);
+hasOwnProperty(windowsVersion);
 
-function getObjectValues(obj) {
+function  hasOwnProperty(obj) {
     for (var key in obj) {
         console.log(key + ' = ' + obj[key]);
     }
-}
