@@ -8,9 +8,5 @@ const windowsVersion = {
 console.log(isProperty(windowsVersion, 'developer'));
 
 function isProperty(object, property) {
-    if (object.hasOwnProperty(property)) {
-        return true;
-    } else {
-        return false;
-    }
-}
+    return property in object
+};
